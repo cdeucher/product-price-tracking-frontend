@@ -56,10 +56,10 @@ jobs:
       - name: Push to S3
         id: s3
         run: |
-          aws s3 sync ./dist/ "s3://${{ secrets.BUCKET }}/app/" --exclude '.*'
+          aws s3 sync ./dist/app/ "s3://${{ secrets.BUCKET }}/app/" --exclude '.*'
 
       - name: CloudFront Invalidation
         id: cloudfront
         run: |
-          aws cloudfront create-invalidation --paths="/" --distribution-id="${{ secrets.CF_DISTRIBUTION }}" \
+          aws cloudfront create-invalidation --paths="/*" --distribution-id="${{ secrets.CF_DISTRIBUTION }}" \
           --query Invalidation.Id --output text

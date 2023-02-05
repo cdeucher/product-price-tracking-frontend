@@ -14,6 +14,8 @@ export class LoginComponent {
   private awsCognitoLoginDomain: string = "https://" + this.cognito_domain + ".auth." + this.region + ".amazoncognito.com";
   private cognitoUrlFromUserPoolUI: string = this.awsCognitoLoginDomain + "/login?client_id=" + this.client_id + "&response_type=token&scope=email+openid+phone&redirect_uri=" + this.domainToRedirect;
 
+  private loggedIn: boolean = false;
+
   ngOnInit(): void {
     this.checkLogin();
   }
@@ -22,7 +24,8 @@ export class LoginComponent {
     if (this.validateUrlToken() === false && this.validateStoredToken() === false) {
       this.redirectLogin();
     } else {
-      this.checkToken();
+      this.loggedIn = true;
+      this.validateToken();
     }
   }
   private validateUrlToken():boolean {
@@ -39,17 +42,30 @@ export class LoginComponent {
       return true;
     }
   }
-  public checkToken():void {
-    console.log("split:", window.location.href.split('id_token='));
-    let token:string = window.location.href.split('id_token=')[1].split('&')[0];
-    console.log("access_token:", token);
-    this.setToken(token);
+  public validateToken():void {
+    try {
+      console.log("split:", window.location.href.split('id_token='));
+      let token:string = window.location.href.split('id_token=')[1].split('&')[0];
+      console.log("access_token:", token);
+      this.setToken(token);
+    } catch (e) {
+      console.log("Error:", e);
+    }
   }
   private setToken(token:string):void {
     localStorage.setItem('token', token);
   }
   public redirectLogin():void {
     window.location.href = this.cognitoUrlFromUserPoolUI;
+  }
+
+  public getLoginStatus():boolean {
+    return this.loggedIn;
+  }
+
+  public logout():void {
+    localStorage.removeItem('token');
+    this.loggedIn = false;
   }
 
 }
