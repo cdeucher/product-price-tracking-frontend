@@ -1,2 +1,14 @@
-URL:<input type="text" value="{{ url }}">
-$<input type="text" value="{{ targetPrice }}">
+URL:<input type="text"  [(ngModel)]="url" >
+$<input type="text" [(ngModel)]="targetPrice">
+<button (click)="register()">Set Product</button>
+
+<div *ngIf="!validateUrl()">
+  Invalid URL
+</div>
+<div *ngIf="!validateTargetPrice()">
+  Invalid Target Price
+</div>
+
+<div *ngIf="logTrace">
+    {{logTrace}}
+</div>

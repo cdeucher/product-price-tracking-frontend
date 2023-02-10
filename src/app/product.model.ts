@@ -3,5 +3,6 @@ export interface ProductModel {
   title: string;
   price_target: number;
   price: number;
+  url: string;
   date: string;
 }
