@@ -9,11 +9,11 @@ import { AppService } from "../app.service";
 })
 export class RegisterComponent {
 
-  public url: string = '';
-  public targetPrice: number = 0;
-  public apiUrl: string = GB.BASE_API_URL;
+  public url = '';
+  public targetPrice = 0;
+  public apiUrl = GB.BASE_API_URL;
 
-  public logTrace: string = '';
+  public logTrace = '';
 
   constructor( private appService: AppService ) { }
 
@@ -26,7 +26,7 @@ export class RegisterComponent {
     this.logTrace = '';
 
     if( this.validateUrl() && this.validateTargetPrice() ) {
-      let data: string = '[{"price_target":"'+this.targetPrice+'","url":"'+this.url+'"}]';
+      const data: string = '[{"price_target":"'+this.targetPrice+'","url":"'+this.url+'"}]';
       this.appService.register(data).subscribe(
         data => {
           console.log("data:", data);
@@ -39,7 +39,8 @@ export class RegisterComponent {
   }
 
   public validateUrl():boolean {
-    const regExp = new RegExp("^https?:\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$");
+    // @ts-ignore
+    const regExp = new RegExp('^https?:\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$');
     if (regExp.test(this.url)) {
       return true;
     } else {

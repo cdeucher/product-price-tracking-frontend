@@ -4,13 +4,14 @@ import { ProductModel } from "./product.model";
 
 @Injectable()
 export class AppService implements OnInit {
-  private apiUrl: string = 'https://api-dev.cabd.link/api';
-  private token:string = ''
+  private apiUrl = 'https://api-dev.cabd.link/api';
+  private token:string
 
   constructor(private http: HttpClient) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+
   }
 
   public setToken(token: string) {
@@ -24,7 +25,7 @@ export class AppService implements OnInit {
     return this.http.get<ProductModel[]>(this.apiUrl);
   }
   public register(product: string) {
-    let options: object = {
+    const options: object = {
       headers: {
         'Authorization': this.getToken(),
         'Content-Type': 'application/json'

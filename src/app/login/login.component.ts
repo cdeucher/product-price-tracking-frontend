@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {GB} from "../global";
 import { AppService } from "../app.service";
 
@@ -9,14 +9,14 @@ import { AppService } from "../app.service";
 })
 export class LoginComponent {
 
-  private client_id: string = "3fhjs4it7br6bmn96rk98jrs4h";
-  private cognito_domain: string = "login-ze0zatn0ipkhxh56";
-  private region: string = "us-east-1";
-  private domainToRedirect: string = GB.BASE_API_URL;
-  private awsCognitoLoginDomain: string = "https://" + this.cognito_domain + ".auth." + this.region + ".amazoncognito.com";
-  private cognitoUrlFromUserPoolUI: string = this.awsCognitoLoginDomain + "/login?client_id=" + this.client_id + "&response_type=token&scope=email+openid+phone&redirect_uri=" + this.domainToRedirect;
-  private loggedIn: boolean = false;
-  public token:string = '';
+  private client_id = "3fhjs4it7br6bmn96rk98jrs4h";
+  private cognito_domain = "login-ze0zatn0ipkhxh56";
+  private region = "us-east-1";
+  private domainToRedirect = GB.BASE_API_URL;
+  private awsCognitoLoginDomain = "https://" + this.cognito_domain + ".auth." + this.region + ".amazoncognito.com";
+  private cognitoUrlFromUserPoolUI = this.awsCognitoLoginDomain + "/login?client_id=" + this.client_id + "&response_type=token&scope=email+openid+phone&redirect_uri=" + this.domainToRedirect;
+  private loggedIn = false;
+  public token = '';
 
   constructor( private appService: AppService ) {
 
