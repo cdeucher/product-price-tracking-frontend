@@ -34,4 +34,13 @@ export class AppService implements OnInit {
     }
     return this.http.post(this.apiUrl, product, options);
   }
+  public subscription(topic: string) {
+    const options: object = {
+      headers: {
+        'Authorization': this.getToken(),
+        'Content-Type': 'application/json'
+      }
+    }
+    return this.http.post(this.apiUrl+'/sub', topic, options);
+  }
 }

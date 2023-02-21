@@ -1,4 +1,4 @@
-<table  class="table table-striped">
+<table class="table table-striped">
   <tbody>
   <tr  *ngFor="let product of products">
     <td>{{product.id}}</td>
@@ -6,6 +6,11 @@
     <td>{{product.price_target}}</td>
     <td>{{product.price}}</td>
     <td>{{product.date}}</td>
+    <td><a href="#" (click)="subscription(product)">sub</a></td>
   </tr>
   </tbody>
 </table>
+
+<div *ngIf="logTrace">
+  {{logTrace}}
+</div>

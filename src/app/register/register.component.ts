@@ -39,19 +39,11 @@ export class RegisterComponent {
   }
 
   public validateUrl():boolean {
-    const regExp = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$');
-    if (regExp.test(this.url)) {
-      return true;
-    } else {
-      return false;
-    }
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const regExp = new RegExp("^https?://[a-z0-9]+([-.]{1}[a-z0-9]+)*.[a-z]{2,5}(:[0-9]{1,5})?(/.*)?$");
+    return (regExp.test(this.url));
   }
   public validateTargetPrice():boolean {
-    if (!isNaN(this.targetPrice) && this.targetPrice > 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return (!isNaN(this.targetPrice) && this.targetPrice > 0);
   }
-
 }
