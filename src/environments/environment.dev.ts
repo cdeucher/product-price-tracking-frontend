@@ -4,5 +4,6 @@ export const environment = {
   redirectUrl: 'https://dash.cabd.link',
   clientId: '3fhjs4it7br6bmn96rk98jrs4h',
   cognitoDomain: 'login-ze0zatn0ipkhxh56',
-  region: 'us-east-1'
+  region: 'us-east-1',
+  tokenExpires: 3600*1000
 };

@@ -39,8 +39,7 @@ export class RegisterComponent {
   }
 
   public validateUrl():boolean {
-    // @ts-ignore
-    const regExp = new RegExp('^https?:\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$');
+    const regExp = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$');
     if (regExp.test(this.url)) {
       return true;
     } else {

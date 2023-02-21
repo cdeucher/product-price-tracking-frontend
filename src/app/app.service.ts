@@ -5,11 +5,12 @@ import {GB} from "./global";
 @Injectable()
 export class AppService implements OnInit {
   private apiUrl = GB.BASE_API_URL
-  private token:string = '';
+  private token = '';
 
   constructor(private http: HttpClient) {
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
 
   }

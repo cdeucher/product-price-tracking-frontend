@@ -27,40 +27,30 @@ export class LoginComponent {
   }
 
   public checkLogin():void {
-    if (this.validateUrlToken() === false && this.validateStoredToken() === false) {
-      this.redirectLogin();
-    } else {
+    if( this.validateStoredToken() ){
       this.loggedIn = true;
-      this.validateToken();
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      this.token = localStorage.getItem('token');
+      this.appService.setToken(this.token);
+    } else
+    if ( this.validateUrlToken() ) {
+      this.token = window.location.href.split('id_token=')[1].split('&')[0];
+      this.setToken();
+    } else {
+      this.redirectLogin();
     }
   }
   private validateUrlToken():boolean {
-    if (window.location.href.split('id_token=').length <= 1) {
-      return false;
-    } else {
-      return true;
-    }
+    return (window.location.href.split('id_token=').length >= 2);
   }
   private validateStoredToken():boolean {
-    if (localStorage.getItem('token') === null) {
-      return false;
-    } else {
-      return true;
-    }
+    return (this.isTokenSet() && this.isExpiresSet() && this.isTokenNotExpired());
   }
-  public validateToken():void {
-    try {
-      console.log("split:", window.location.href.split('id_token='));
-      this.token = window.location.href.split('id_token=')[1].split('&')[0];
-      console.log("access_token:", this.token);
-      this.setToken(this.token);
-    } catch (e) {
-      console.log("Error:", e);
-    }
-  }
-  private setToken(token:string):void {
-    localStorage.setItem('token', token);
-    this.appService.setToken(token);
+  private setToken():void {
+    localStorage.setItem('token', this.token);
+    localStorage.setItem('expires_at', (GB.TOKEN_EXPIRES + new Date().getTime()).toString());
+    this.appService.setToken(this.token);
   }
   public redirectLogin():void {
     window.location.href = this.cognitoUrlFromUserPoolUI;
@@ -75,4 +65,13 @@ export class LoginComponent {
     this.loggedIn = false;
   }
 
+  private isTokenNotExpired() {
+    return (Number(localStorage.getItem('expires_at')) > new Date().getTime());
+  }
+  private isTokenSet() {
+    return (localStorage.getItem('token') != null);
+  }
+  private isExpiresSet() {
+    return (localStorage.getItem('expires_at') != null);
+  }
 }
