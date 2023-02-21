@@ -1,11 +1,11 @@
 import { Injectable, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { ProductModel } from "./product.model";
-
+import {GB} from "./global";
 @Injectable()
 export class AppService implements OnInit {
-  private apiUrl = 'https://api-dev.cabd.link/api';
-  private token:string
+  private apiUrl = GB.BASE_API_URL
+  private token:string = '';
 
   constructor(private http: HttpClient) {
   }

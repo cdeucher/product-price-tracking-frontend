@@ -1,15 +1,20 @@
 {
-  "name": "app",
-  "version": "0.0.0",
+  "name": "product-price-tracking",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "dev": "ng serve --configuration=development",
+    "start": "ng serve --configuration=production",
+    "build": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "eslint . --ext .ts"
   },
   "private": true,
+  "engines": {
+    "node": "16.16.0",
+    "npm": "8.11.0"
+  },
   "dependencies": {
     "@angular/animations": "^15.1.0",
     "@angular/common": "^15.1.0",

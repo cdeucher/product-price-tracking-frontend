@@ -9,10 +9,10 @@ import { AppService } from "../app.service";
 })
 export class LoginComponent {
 
-  private client_id = "3fhjs4it7br6bmn96rk98jrs4h";
-  private cognito_domain = "login-ze0zatn0ipkhxh56";
-  private region = "us-east-1";
-  private domainToRedirect = GB.BASE_API_URL;
+  private client_id = GB.CLIENT_ID;
+  private cognito_domain = GB.COGNITO_DOMAIN;
+  private region = GB.REGION;
+  private domainToRedirect = GB.REDIRECT_URL;
   private awsCognitoLoginDomain = "https://" + this.cognito_domain + ".auth." + this.region + ".amazoncognito.com";
   private cognitoUrlFromUserPoolUI = this.awsCognitoLoginDomain + "/login?client_id=" + this.client_id + "&response_type=token&scope=email+openid+phone&redirect_uri=" + this.domainToRedirect;
   private loggedIn = false;
