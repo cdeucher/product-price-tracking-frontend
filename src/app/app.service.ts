@@ -12,7 +12,6 @@ export class AppService implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
-
   }
 
   public setToken(token: string) {

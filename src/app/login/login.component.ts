@@ -38,7 +38,7 @@ export class LoginComponent {
       this.token = window.location.href.split('id_token=')[1].split('&')[0];
       this.setToken();
     } else {
-      this.redirectLogin();
+      this.redirect(this.cognitoUrlFromUserPoolUI);
     }
   }
   private validateUrlToken():boolean {
@@ -51,9 +51,10 @@ export class LoginComponent {
     localStorage.setItem('token', this.token);
     localStorage.setItem('expires_at', (GB.TOKEN_EXPIRES + new Date().getTime()).toString());
     this.appService.setToken(this.token);
+    this.redirect(this.domainToRedirect);
   }
-  public redirectLogin():void {
-    window.location.href = this.cognitoUrlFromUserPoolUI;
+  public redirect(url?:string):void {
+    window.location.href = (url) ? url : this.domainToRedirect;
   }
 
   public getLoginStatus():boolean {
@@ -63,6 +64,7 @@ export class LoginComponent {
   public logout():void {
     localStorage.removeItem('token');
     this.loggedIn = false;
+    this.redirect();
   }
 
   private isTokenNotExpired() {

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {GB} from "../global";
 import { AppService } from "../app.service";
+import {catchError, throwError} from "rxjs";
 
 @Component({
   selector: 'app-register',
@@ -27,11 +28,19 @@ export class RegisterComponent {
 
     if( this.validateUrl() && this.validateTargetPrice() ) {
       const data: string = '{"action":"new","product":{"price_target":"'+this.targetPrice+'","url":"'+this.url+'"}}';
-      this.appService.register(data).subscribe(
+      const request = this.appService.register(data);
+      request.subscribe(
         data => {
           console.log("data:", data);
           this.logTrace = JSON.stringify(data);
         }
+      );
+      request.pipe(
+        catchError(err => {
+          console.log("err:", err);
+          this.logTrace = JSON.stringify(err);
+          return throwError(err);
+        })
       );
     } else {
       console.log("invalid url");

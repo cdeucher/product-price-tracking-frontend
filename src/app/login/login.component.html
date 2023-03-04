@@ -1,2 +1,2 @@
-<a href="#" *ngIf="getLoginStatus()" (click)="redirectLogin()">Logged (Logout)</a>
-<a href="#" *ngIf="!getLoginStatus()" (click)="logout()">Not Logged (Login)</a>
+<a href="#" *ngIf="getLoginStatus()" (click)="logout()">Logged (Logout)</a>
+<a href="#" *ngIf="!getLoginStatus()" (click)="checkLogin()">Not Logged (Login)</a>

@@ -19,7 +19,7 @@ export class HomeComponent {
 
     this.logTrace = '';
 
-    const data = '{"topic":"'+product.id+'"}';
+    const data = '{"action":"subscribe","topic":{"id":"'+product.id+'"}}';
     this.appService.subscription(data).subscribe(
       data => {
         console.log("data:", data);
