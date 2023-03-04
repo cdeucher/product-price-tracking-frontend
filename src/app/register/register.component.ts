@@ -26,7 +26,7 @@ export class RegisterComponent {
     this.logTrace = '';
 
     if( this.validateUrl() && this.validateTargetPrice() ) {
-      const data: string = '[{"price_target":"'+this.targetPrice+'","url":"'+this.url+'"}]';
+      const data: string = '{"action":"new","product":{"price_target":"'+this.targetPrice+'","url":"'+this.url+'"}}';
       this.appService.register(data).subscribe(
         data => {
           console.log("data:", data);
