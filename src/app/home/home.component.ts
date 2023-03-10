@@ -27,4 +27,8 @@ export class HomeComponent {
       }
     );
   }
+
+  getImage(image_url: string) {
+    return image_url ? image_url : 'https://via.placeholder.com/80';
+  }
 }

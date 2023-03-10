@@ -4,8 +4,10 @@
 <table class="table table-striped">
   <tbody>
   <tr  *ngFor="let product of products">
-    <td>{{product.id}}</td>
-    <td>{{product.title}}</td>
+    <td>
+      <img class="card-small" [src]="getImage(product.image_url)" alt="Image">
+    </td>
+    <td>{{product.title | truncate:90}}</td>
     <td>{{product.price_target}}</td>
     <td>{{product.price}}</td>
     <td>{{product.date}}</td>

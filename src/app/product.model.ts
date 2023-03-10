@@ -5,4 +5,5 @@ export interface ProductModel {
   price: number;
   url: string;
   date: string;
+  image_url: string;
 }
